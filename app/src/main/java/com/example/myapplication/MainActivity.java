@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
     Button btn_foto;
     ImageView fotico;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
     String rutaImagen;  // Para almacenar la ruta de la imagen
 
     @Override
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void capturarfoto() {
         Intent Intentfoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (Intentfoto.resolveActivity(getPackageManager()) != null) {
+
 
             // Crear archivo donde se almacenará la imagen
             File imagenAlmacenamiento = null;
@@ -51,21 +51,19 @@ public class MainActivity extends AppCompatActivity {
                         "com.example.myapplication",
                         imagenAlmacenamiento);
                 Intentfoto.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(Intentfoto, REQUEST_IMAGE_CAPTURE);
+                startActivityForResult(Intentfoto, 1);
             }
-        }
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            // Muestra la foto en el ImageView desde la ruta guardada
-            File imgFile = new File(rutaImagen);
-            if (imgFile.exists()) {
-                fotico.setImageURI(Uri.fromFile(imgFile));
-            }
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+
+            Bitmap imagenmostrar = BitmapFactory.decodeFile(rutaImagen);
+            fotico.setImageBitmap(imagenmostrar);
         }
     }
 
