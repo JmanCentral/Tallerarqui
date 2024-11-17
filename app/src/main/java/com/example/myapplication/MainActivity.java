@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btn_foto;
     ImageView fotico;
-    String rutaImagen;  // Para almacenar la ruta de la imagen
+    String rutaImagen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && resultCode == RESULT_OK) {
-
+            //Bundle imagenmostrar  = data.getExtras();
             Bitmap imagenmostrar = BitmapFactory.decodeFile(rutaImagen);
             fotico.setImageBitmap(imagenmostrar);
         }
@@ -71,11 +71,7 @@ public class MainActivity extends AppCompatActivity {
         // Crear un nombre de archivo único basado en la fecha/hora
         String nombreImagen = "fotico_" + System.currentTimeMillis();
         File directorio = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File imagen = File.createTempFile(
-                nombreImagen,  // Prefijo del nombre
-                ".jpg",        // Sufijo del archivo
-                directorio     // Directorio donde se guardará la imagen
-        );
+        File imagen = File.createTempFile( nombreImagen,  ".jpg", directorio);
 
         // Guardar la ruta absoluta de la imagen para uso posterior
         rutaImagen = imagen.getAbsolutePath();
