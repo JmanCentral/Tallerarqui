@@ -17,6 +17,7 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Se inicializan las variables
     Button btn_foto;
     ImageView fotico;
     String rutaImagen;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         btn_foto.setOnClickListener(view -> capturarfoto());
     }
 
+    //Método para tomar la foto
     private void capturarfoto() {
         Intent Intentfoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //manejar el resultado de una actividad iniciada, verificando si el código de solicitud es 1 y si el resultado es OK, luego carga una imagen desde una ruta especificada y la muestra
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Crear un archivo de imagen temporal en el directorio de imágenes externas de la aplicación
     private File crearImagen() throws IOException {
 
         String nombreImagen = "fotico_";
