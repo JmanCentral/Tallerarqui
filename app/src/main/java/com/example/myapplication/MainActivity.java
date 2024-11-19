@@ -47,9 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Si la imagen fue creada correctamente, continuar
             if (imagenAlmacenamiento != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.example.myapplication",
-                        imagenAlmacenamiento);
+                Uri photoURI = FileProvider.getUriForFile(this, "com.example.myapplication", imagenAlmacenamiento);
                 Intentfoto.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(Intentfoto, 1);
             }
@@ -68,12 +66,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private File crearImagen() throws IOException {
-        // Crear un nombre de archivo único basado en la fecha/hora
-        String nombreImagen = "fotico_" + System.currentTimeMillis();
+
+        String nombreImagen = "fotico_";
         File directorio = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File imagen = File.createTempFile( nombreImagen,  ".jpg", directorio);
 
-        // Guardar la ruta absoluta de la imagen para uso posterior
+
         rutaImagen = imagen.getAbsolutePath();
         return imagen;
     }
